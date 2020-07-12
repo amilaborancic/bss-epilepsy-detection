@@ -4,7 +4,6 @@ library(e1071)
 normalize <- function(x) {
   return ((x - min(x)) / (max(x) - min(x)))
 }
-scale(x, center = TRUE, scale = TRUE)
 
 
 no_seizure_data <- read.csv("EpilepticSeizureRecognitionREDUCED.csv", header=T)
