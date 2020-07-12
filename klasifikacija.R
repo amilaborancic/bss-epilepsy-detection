@@ -42,9 +42,14 @@ while(i < nrow(seizure_data) && i < nrow(no_seizure_data)){
 }
 train_data <- na.omit(train_data)
 test_data <- na.omit(test_data)
+train_data["Klasa"] <- lapply(train_data["Klasa"], as.factor)
+test_data["Klasa"] <- lapply(test_data["Klasa"], as.factor)
 
 #normalizacija
 nm_train <- normalize(train_data[,!colnames(train_data) %in% c("key","Klasa")])
 nm_test <- normalize(test_data[,!colnames(test_data) %in% c("key","Klasa")])
 nm_train$Klasa<-train_data[,c("Klasa")]
 nm_test$Klasa <- test_data[,c("Klasa")]
+
+
+
