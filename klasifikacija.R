@@ -26,25 +26,28 @@ train_data <- data.frame()
 test_data <- data.frame()
 print(nrow(train_data))
 
-while(i < (nrow(seizure_data)-23) && i < (nrow(no_seizure_data)-23)){
+while(i < (nrow(seizure_data)) && i < (nrow(no_seizure_data))){
   dummy <- data.frame(seizure_data[(i+1):(i+23),])
-  print(nrow(dummy))
-  i <- i + 23
   dummy_2 <- data.frame(no_seizure_data[(i+1):(i+23),])
-  i <- i + 23
-  train_data <- rbind(train_data, dummy)
-  print(nrow(train_data))
-  test_data <- rbind(test_data, dummy_2)
+  ####ovo iz nekog razloga poremeti dataset - bude ukupno 50 kolona umjesto 179
+  if(f){
+    train_data <- rbind(train_data, dummy)
+    test_data <- rbind(test_data, dummy_2)
+  }
+  else{
+    train_data <- rbind(train_data, dummy_2)
+    test_data <- rbind(test_data, dummy)
+  }
+  i<-i+23
+  f <- !f
 }
 
 train_data["Klasa"] <- lapply(train_data["Klasa"], as.factor)
 test_data["Klasa"] <- lapply(test_data["Klasa"], as.factor)
 
-#normalizacija
+#normalizacija 
 nm_train <- normalize(train_data[,!colnames(train_data) %in% c("key","Klasa")])
 nm_test <- normalize(test_data[,!colnames(test_data) %in% c("key","Klasa")])
 nm_train$Klasa<-train_data[,c("Klasa")]
 nm_test$Klasa <- test_data[,c("Klasa")]
-
-
 
