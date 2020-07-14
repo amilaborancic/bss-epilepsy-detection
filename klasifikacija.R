@@ -1,5 +1,6 @@
 setwd("C://Users/USER/Desktop/bss-epilepsy-detection")
 library(e1071)
+library(caret)
 
 normalize <- function(x) {
   return ((x - min(x)) / (max(x) - min(x)))
@@ -50,4 +51,11 @@ nm_train <- normalize(train_data[,!colnames(train_data) %in% c("key","Klasa")])
 nm_test <- normalize(test_data[,!colnames(test_data) %in% c("key","Klasa")])
 nm_train$Klasa<-train_data[,c("Klasa")]
 nm_test$Klasa <- test_data[,c("Klasa")]
+
+tune.out <- tune(svm,Klasa~.,data=nm_train, kernel ="linear", ranges=list(cost=c(0.01,0.1,1,10)))
+svm_model <- tune.out$best.model
+svm_predict <- predict(svm_model, nm_test)
+svm_model <- tune.out$best.model
+confusionMatrix(svm_predict,nm_test$Klasa)
+
 
