@@ -1,4 +1,5 @@
 
+
   user_input<-function(){
      rb <- readline(prompt="Unesite redni broj pacijenta (od 1 do 100): "); 
      rb<-as.numeric(rb)
@@ -38,4 +39,5 @@
   }
   }
  
+  user_input()
   

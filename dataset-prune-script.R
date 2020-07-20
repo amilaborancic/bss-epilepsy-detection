@@ -5,7 +5,6 @@ library(e1071)
 #ucitavanje dataseta
 data_original <- read.csv("EpilepticSeizureRecognitionORIGINAL.csv", header=T)
 
-#izdvojimo 100 od 500 ispitanika
 data_reduced <- data_original[1:2300, ]
 data_reduced_2 <- data_original[4601:6900, ]
 

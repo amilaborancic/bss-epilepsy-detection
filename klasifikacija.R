@@ -20,7 +20,6 @@ plot(1:length(plotdata), plotdata, type="l")
 
 
 #izvadimo svakog drugog ispitanika iz prvog i drugog seta da napravimo trening set
-
 i <- 0
 f <- FALSE
 train_data <- data.frame()
@@ -30,7 +29,7 @@ print(nrow(train_data))
 while(i < (nrow(seizure_data)) && i < (nrow(no_seizure_data))){
   dummy <- data.frame(seizure_data[(i+1):(i+23),])
   dummy_2 <- data.frame(no_seizure_data[(i+1):(i+23),])
-  ####ovo iz nekog razloga poremeti dataset - bude ukupno 50 kolona umjesto 179
+  
   if(f){
     train_data <- rbind(train_data, dummy)
     test_data <- rbind(test_data, dummy_2)
