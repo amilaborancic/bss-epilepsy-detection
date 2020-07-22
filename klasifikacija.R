@@ -11,7 +11,7 @@ no_seizure_data <- read.csv("EpilepticSeizureRecognitionREDUCED.csv", header=T)
 seizure_data <- read.csv("EpilepticSeizureRecognitionREDUCED_2.csv", header=T)
 
 #plotanje date
-plotdata <- seizure_data[24:46,]
+plotdata <- normalize(seizure_data[24:46,])
 plotdata <- plotdata[, -ncol(plotdata)]
 plotdata <- plotdata[, -1]
 plotdata <- as.numeric(unlist(plotdata))
