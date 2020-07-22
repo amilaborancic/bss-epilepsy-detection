@@ -2,6 +2,7 @@
 setwd("C://Users/USER/Desktop/bss-epilepsy-detection")
 library(e1071)
 
+
 #ucitavanje dataseta
 data_original <- read.csv("EpilepticSeizureRecognitionORIGINAL.csv", header=T)
 

@@ -10,13 +10,6 @@ normalize <- function(x) {
 no_seizure_data <- read.csv("EpilepticSeizureRecognitionREDUCED.csv", header=T)
 seizure_data <- read.csv("EpilepticSeizureRecognitionREDUCED_2.csv", header=T)
 
-#plotanje date
-plotdata <- normalize(seizure_data[24:46,])
-plotdata <- plotdata[, -ncol(plotdata)]
-plotdata <- plotdata[, -1]
-plotdata <- as.numeric(unlist(plotdata))
-
-plot(1:length(plotdata), plotdata, type="l")
 
 
 #izvadimo svakog drugog ispitanika iz prvog i drugog seta da napravimo trening set
@@ -50,10 +43,5 @@ nm_train <- normalize(train_data[,!colnames(train_data) %in% c("key","Klasa")])
 nm_test <- normalize(test_data[,!colnames(test_data) %in% c("key","Klasa")])
 nm_train$Klasa<-train_data[,c("Klasa")]
 nm_test$Klasa <- test_data[,c("Klasa")]
-#konfuzijska matrica
-tune.out <- tune(svm,Klasa~.,data=nm_train, kernel ="linear", ranges=list(cost=c(0.01,0.1,1,10)))
-svm_model <- tune.out$best.model
-svm_predict <- predict(svm_model, nm_test)
-svm_model <- tune.out$best.model
-svm_table <- confusionMatrix(svm_predict, nm_test$Klasa)
+
 
